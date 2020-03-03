@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DiceGame</string>
+    <string name="throw_all">Select all</string>
+    <string name="throw_dices">Throw</string>
 </resources>
