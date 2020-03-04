@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_create_dice_set.*
-import kotlinx.android.synthetic.main.dice_item.*
+import kotlinx.android.synthetic.main.dice_item.view.*
+import java.text.FieldPosition
+
 
 class CreateDiceSetActivity : AppCompatActivity() {
     val diceList = arrayListOf<Dice>()
@@ -25,6 +27,12 @@ class CreateDiceSetActivity : AppCompatActivity() {
 
     fun addDice(view: View) {
         diceList.add(Dice())
+        adapter.notifyDataSetChanged()
+    }
+
+
+    fun deleteDice(position: Int){
+        diceList.remove(diceList.get(position))
         adapter.notifyDataSetChanged()
     }
 
