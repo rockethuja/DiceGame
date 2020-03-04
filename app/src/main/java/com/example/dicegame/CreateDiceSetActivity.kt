@@ -19,7 +19,7 @@ class CreateDiceSetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_dice_set)
 
         for (i in 0..2) {
-            diceList.add(Dice(colour = ContextCompat.getColor(this, R.color.colorAccent)))
+            diceList.add(Dice(colour = ContextCompat.getColor(this, R.color.green)))
         }
         adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter

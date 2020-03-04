@@ -111,7 +111,6 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
                 id: Long
             ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
-
                 when (selectedItem) {
                     "cyan" -> frame.setBackgroundColor(Color.parseColor("#03FFEE"))
                     "red" -> frame.setBackgroundColor(Color.parseColor("#E80231"))
