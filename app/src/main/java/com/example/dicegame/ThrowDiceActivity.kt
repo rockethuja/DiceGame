@@ -4,7 +4,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +15,14 @@ import java.util.*
 
 import kotlin.random.Random
 
-private const val TAG = "SecondActivity"
+private const val TAG = "ThrowDiceActivity"
+
 class ThrowDiceActivity : AppCompatActivity() {
 
     private var gridSize = 0
-    // private var gridButtons: ArrayList<View>? = null
-    private var gridButtons: ArrayList<View> = arrayListOf() // empty
-    private var diceSet : ArrayList<Dice?>? = arrayListOf()
+    private var buttonDiceMapping = mutableMapOf<Int, Dice>()
+    private var gridButtons: ArrayList<View> = arrayListOf()
+    private var diceSet: ArrayList<Dice?>? = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +32,9 @@ class ThrowDiceActivity : AppCompatActivity() {
     }
 
     private fun getBundleFromIntent() {
-
         val extras = intent.extras
-         diceSet= extras!!.getParcelableArrayList("diceSet")
-
-
-        Log.i(TAG,"Second.onCreate, ref $this")
-
-
+        diceSet = extras!!.getParcelableArrayList("diceSet")
+        Log.i(TAG, "ThrowDiceActivity.onCreate, ref $this")
     }
 
     private fun buildGrid(newSize: Int) {
@@ -47,7 +42,6 @@ class ThrowDiceActivity : AppCompatActivity() {
         gridButtons = ArrayList(newSize)
         val constraintLayout: ConstraintLayout = findViewById(R.id.rootLayout)
 
-        // Constraints hier sammeln
         val set = ConstraintSet()
         set.clone(constraintLayout)
 
@@ -56,9 +50,9 @@ class ThrowDiceActivity : AppCompatActivity() {
         val marginR = 0.05f
         val marginBottom = 0.05f
         val dx = (1.0f - marginL - marginR) / 2
-        val dy = (1.0f - marginBottom - marginTop) / (gridSize.toFloat() / 2)
+        val yDivider = if (gridSize % 2 == 0) gridSize / 2 else (gridSize + 1) / 2
+        val dy = (1.0f - marginBottom - marginTop) / yDivider
 
-        // obere und untere "Grenze" zwischen 10% und 40%
         val idHG05 = View.generateViewId()
         set.create(idHG05, ConstraintSet.HORIZONTAL_GUIDELINE)
         set.setGuidelinePercent(idHG05, marginTop)
@@ -66,77 +60,54 @@ class ThrowDiceActivity : AppCompatActivity() {
         set.create(idHG10, ConstraintSet.HORIZONTAL_GUIDELINE)
         set.setGuidelinePercent(idHG10, 1.0f - marginBottom)
 
-//        val divideBy =
-//            if (gridSize % 3 == 0) gridSize / 3 else if (gridSize % 2 == 0) gridSize / 2 else 1
-//        val dicesPerRow = if (gridSize % 3 == 0) 3 else if (gridSize % 2 == 0) 2 else 1
-
         val hIds = ArrayList<Int>(gridSize / 2)
         val vIds = ArrayList<Int>(3)
 
         // add 3 vertial guidelines
         for (i in 0..2) {
             val idV = View.generateViewId()
-//            val idH = View.generateViewId()
-
             set.create(idV, ConstraintSet.VERTICAL_GUIDELINE)
             set.setGuidelinePercent(idV, marginL + i * dx)
             vIds.add(idV)
-
-//            set.create(idH, ConstraintSet.HORIZONTAL_GUIDELINE)
-//            set.setGuidelinePercent(idH, marginTop + divideBy * i * dy)
-//            hIds.add(idH)
         }
 
-        for (i in 0..gridSize / 2) {
+        for (i in 0..(gridSize + 1) / 2) {
             val idH = View.generateViewId()
             set.create(idH, ConstraintSet.HORIZONTAL_GUIDELINE)
             set.setGuidelinePercent(idH, marginTop + i * dy)
             hIds.add(idH)
         }
 
-        for (i in 0 until gridSize / 2) {
+        val border = (gridSize + 1) / 2
+        var count = 0
+
+        for (i in 0 until border) {
             for (j in 0 until 2) {
+                if (gridSize % 2 != 0 && j == 1 && i == (border - 1)) {
+                    continue;
+                }
                 val idB = View.generateViewId()
+                buttonDiceMapping[idB] = diceSet!![count]!!
                 val button = Button(this).apply {
                     id = idB
-                    text = "Button $i"
+                    text = throwDice(buttonDiceMapping[idB]!!.max)
                     tag = i
-                    width = ViewGroup.LayoutParams.WRAP_CONTENT
-                    height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    layoutParams = ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT
+                    )
                     setOnClickListener { v: View -> onClickButton(v) }
                 }
-                button.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+                button.setBackgroundColor(buttonDiceMapping[idB]!!.colour)
                 constraintLayout.addView(button)
                 gridButtons.add(button)
-                set.connect(idB, ConstraintSet.LEFT, vIds[j], ConstraintSet.RIGHT, 1)
-                set.connect(idB, ConstraintSet.RIGHT, vIds[j + 1], ConstraintSet.LEFT, 1)
-                set.connect(idB, ConstraintSet.TOP, hIds[i], ConstraintSet.BOTTOM, 1)
-                set.connect(idB, ConstraintSet.BOTTOM, hIds[i + 1], ConstraintSet.TOP, 1)
+                set.connect(idB, ConstraintSet.LEFT, vIds[j], ConstraintSet.RIGHT, 3)
+                set.connect(idB, ConstraintSet.RIGHT, vIds[j + 1], ConstraintSet.LEFT, 3)
+                set.connect(idB, ConstraintSet.TOP, hIds[i], ConstraintSet.BOTTOM, 3)
+                set.connect(idB, ConstraintSet.BOTTOM, hIds[i + 1], ConstraintSet.TOP, 3)
+                count++
             }
         }
-
-//        // gridSize Buttons zwischen den Guidelines i und i+1
-//        for (i in 0 until gridSize / divideBy) {
-//            for (j in 0 until gridSize / divideBy) {
-//                val idB = View.generateViewId()
-//                val button = Button(this).apply {
-//                    id = idB
-//                    text = "Button $i$j"
-//                    tag = i + j
-//                    width = ViewGroup.LayoutParams.WRAP_CONTENT
-//                    height = ViewGroup.LayoutParams.WRAP_CONTENT
-//                    setOnClickListener { v: View -> onClickButton(v) }
-//                }
-//                button.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
-//                constraintLayout.addView(button)
-//                gridButtons.add(button)
-//                set.connect(idB, ConstraintSet.LEFT, vIds[i], ConstraintSet.RIGHT, 1)
-//                set.connect(idB, ConstraintSet.RIGHT, vIds[i + 1], ConstraintSet.LEFT, 1)
-//                set.connect(idB, ConstraintSet.TOP, hIds[j], ConstraintSet.BOTTOM, 1)
-//                set.connect(idB, ConstraintSet.BOTTOM, hIds[j + 1], ConstraintSet.TOP, 1)
-//            }
-//        }
-        // und alle Constraints aktivieren
         set.applyTo(constraintLayout)
     }
 
@@ -175,8 +146,13 @@ class ThrowDiceActivity : AppCompatActivity() {
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
             if (colorId == accent)
-                button.text = Random.nextInt(0, 100).toString()
+                button.text = throwDice(buttonDiceMapping[button.id]!!.max)
+//                button.text = throwDice(diceSet!![count]!!.max)
         }
+    }
+
+    private fun throwDice(max: Int): String {
+        return Random.nextInt(1, max + 1).toString()
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {

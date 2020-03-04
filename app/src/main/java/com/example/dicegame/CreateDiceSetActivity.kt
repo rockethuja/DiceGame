@@ -16,15 +16,15 @@ class CreateDiceSetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
 
-        for (i in 0..9) {
-            diceList.add(Dice())
+        for (i in 0..2) {
+            diceList.add(Dice(colour = ContextCompat.getColor(this, R.color.colorAccent)))
         }
         adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter
     }
 
     fun addDice(view: View) {
-        diceList.add(Dice())
+        diceList.add(Dice(colour = ContextCompat.getColor(this, R.color.colorAccent)))
         adapter.notifyDataSetChanged()
     }
 
