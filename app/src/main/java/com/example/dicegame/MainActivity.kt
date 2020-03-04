@@ -1,7 +1,14 @@
 package com.example.dicegame
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -9,4 +16,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+    fun startCreateDiceActivity(view : View){
+        val intent = Intent(this, CreateDiceSetActivity::class.java)
+        startActivity(intent)
+    }
+
+
+
 }
+
+
+
+
+
+
+

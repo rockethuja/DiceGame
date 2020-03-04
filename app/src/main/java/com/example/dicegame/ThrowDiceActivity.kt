@@ -1,29 +1,45 @@
 package com.example.dicegame
 
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_throw_dice.*
-import java.util.ArrayList
+import java.util.*
+
 import kotlin.random.Random
 
+private const val TAG = "SecondActivity"
 class ThrowDiceActivity : AppCompatActivity() {
 
     private var gridSize = 0
-    private var gridButtons: ArrayList<View> = arrayListOf()
+    // private var gridButtons: ArrayList<View>? = null
+    private var gridButtons: ArrayList<View> = arrayListOf() // empty
+    private var diceSet : ArrayList<Dice?>? = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_throw_dice)
+        getBundleFromIntent()
+        buildGrid(diceSet?.size ?: 0)
+    }
 
-        buildGrid(9)
+    private fun getBundleFromIntent() {
+
+        val extras = intent.extras
+         diceSet= extras!!.getParcelableArrayList("diceSet")
+
+
+        Log.i(TAG,"Second.onCreate, ref $this")
+
+
     }
 
     private fun buildGrid(newSize: Int) {

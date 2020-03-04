@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">DiceGame</string>
+    <string name="add_dice">add dice</string>
+    <string name="startThrowDices">start</string>
+    <string name="save_diceset">save diceset</string>
+
     <string name="throw_all">Select all</string>
     <string name="throw_dices">Throw</string>
+
+    <string name="selected_item">Selected item:</string>
+    <string name="create_dice_set">Create Dice Set</string>
+    <string name="start">Start</string>
+
+
 </resources>
