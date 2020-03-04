@@ -15,13 +15,11 @@ class CreateDiceSetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
 
-
         for (i in 0..9) {
             diceList.add(Dice())
         }
         val adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter
-
     }
 
   fun addDice(view: View){
@@ -30,20 +28,5 @@ class CreateDiceSetActivity : AppCompatActivity() {
     }
 
 
-    fun increaseInteger(view: View) {
-        var amount = amount_of_page.text.toString().toInt()
-        amount++
-        amount_of_page.text = amount.toString()
-    }
 
-    fun setAmountOfPages(amount: Int) {
-        amount_of_page.text = amount.toString()
-    }
-
-    fun reduceInteger(view: View) {
-        var amount = amount_of_page.text.toString().toInt()
-        amount--
-        amount_of_page.text = amount.toString()
-
-    }
 }

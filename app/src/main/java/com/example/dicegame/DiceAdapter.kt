@@ -13,7 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.Spinner
-import kotlinx.android.synthetic.main.dice_item.*
+
 
 
 class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Dice>) :
@@ -71,9 +71,7 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
         lateinit var colourButton: Button
     }
 
-    fun createDiceItemLayout() {
 
-    }
 
     fun setUpSpinner(view: View) {
         val spinner: Spinner = view.findViewById(R.id.spinner)
@@ -104,6 +102,22 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
             spinner.adapter = adapter
         }
     }
+
+    fun increaseInteger(view: View) {
+        //@TODO IDs aus ViewHolder holen
+        var amount = view.findViewById<TextView>(R.id.amount_of_page).text.toString().toInt()
+        amount++
+        view.findViewById<TextView>(R.id.amount_of_page).text = amount.toString()
+    }
+
+    fun reduceInteger(view: View) {
+        var amount = view.findViewById<TextView>(R.id.amount_of_page).text.toString().toInt()
+        amount--
+        view.findViewById<TextView>(R.id.amount_of_page).text = amount.toString()
+
+    }
+
+
 
 
 }
