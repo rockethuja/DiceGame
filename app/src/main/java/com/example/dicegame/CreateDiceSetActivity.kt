@@ -18,22 +18,14 @@ class CreateDiceSetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
 
-        for (i in 0..9) {
             diceList.add(Dice())
-        }
+
         adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter
     }
 
     fun addDice(view: View) {
-        diceList.add(Dice())
-        adapter.notifyDataSetChanged()
-    }
-
-
-    fun deleteDice(position: Int){
-        diceList.remove(diceList.get(position))
-        adapter.notifyDataSetChanged()
+        adapter.addDice()
     }
 
     fun startThrowDiceActivity(view: View) {
