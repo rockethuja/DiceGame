@@ -82,7 +82,10 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
             maxTextView.text = amount.toString()
         }
 
-
+        deleteButton.setOnClickListener{
+            dices.remove(dices.get(position))
+            this.notifyDataSetChanged()
+        }
 
         return view
     }
