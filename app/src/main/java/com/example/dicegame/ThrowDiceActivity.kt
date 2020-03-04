@@ -60,10 +60,10 @@ class ThrowDiceActivity : AppCompatActivity() {
         val set = ConstraintSet()
         set.clone(constraintLayout)
 
-        val marginTop = 0.25f
+        val marginTop = 0.05f
         val marginL = 0.05f
         val marginR = 0.05f
-        val marginBottom = 0.05f
+        val marginBottom = 0.25f
         val dx = (1.0f - marginL - marginR) / 2
         val yDivider = if (gridSize % 2 == 0) gridSize / 2 else (gridSize + 1) / 2
         val dy = (1.0f - marginBottom - marginTop) / yDivider
