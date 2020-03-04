@@ -7,16 +7,15 @@ import android.os.Parcelable
 
 //data class DiceGame(val dices : List<Dice>)
 
-data class Dice(val min : Int = 1, val max : Int = 6 , val colour : Int = WHITE): Parcelable {
+data class Dice( val max : Int = 6 , val colour : Int = WHITE): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(min)
+
         parcel.writeInt(max)
         parcel.writeInt(colour)
     }
