@@ -4,7 +4,6 @@ package com.example.dicegame
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,9 +22,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, CreateDiceSetActivity::class.java)
         startActivity(intent)
     }
-
-
-
 }
 
 

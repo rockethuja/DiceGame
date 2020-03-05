@@ -5,93 +5,134 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_27.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_v_725"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_50"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/frameLayout1"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_weight="0.75"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/colours" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_725"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/colorPrimaryDark"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/guideline_v_27.5"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/guideline_v_50"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" >-->
+    <!--    </FrameLayout>-->
+
     <TextView
         android:id="@+id/dicePosition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_v_50"
-        app:layout_constraintStart_toStartOf="parent"/>
-    <TextView
-        android:id="@+id/page_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guideline_v_50"
-        app:layout_constraintBottom_toTopOf="@+id/maxTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Amount of page: " />
+        app:layout_constraintEnd_toStartOf="@id/guideline_v_27.5"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_05"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/reduce"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintRight_toLeftOf="@+id/maxTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/maxTextView"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/maxTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_v_50"
-        app:layout_constraintStart_toStartOf="parent"/>
-    <Button
-        android:id="@+id/increase"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintLeft_toRightOf="@+id/maxTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/maxTextView"
-        android:text="+" />
+        app:layout_constraintEnd_toStartOf="@id/guideline_v_30"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_27.5"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
+        <ImageButton
+            android:id="@+id/reduce"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_remove_black_24dp" />
+
+        <TextView
+            android:id="@+id/maxTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <ImageButton
+            android:id="@+id/increase"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_24dp" />
+
+    </LinearLayout>
+
+    <ImageButton
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/delete"
+        android:src="@drawable/ic_delete_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/spinner"
-        android:text="@string/delete" />
-
-
-
-    <FrameLayout
-        android:id="@+id/frameLayout1"
-        android:layout_width="20dp"
-        android:layout_height="19dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/spinner"
-        android:background="#f0c030"></FrameLayout>
-
-    <TextView
-        android:id="@+id/colour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/colour"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/frameLayout1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
-        app:layout_constraintLeft_toLeftOf="@id/frameLayout1"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:entries="@array/colours"
-        />
+        app:layout_constraintStart_toStartOf="@id/guideline_v_725"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

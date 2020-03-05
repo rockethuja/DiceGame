@@ -1,13 +1,9 @@
 package com.example.dicegame
 
-import android.graphics.Color.WHITE
 import android.os.Parcel
 import android.os.Parcelable
 
-
-//data class DiceGame(val dices : List<Dice>)
-
-data class Dice( var max : Int = 6 , var colour : Int = R.color.green): Parcelable {
+data class Dice( var max : Int = 6 , var colour : Int = Colours.GREEN): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt()
