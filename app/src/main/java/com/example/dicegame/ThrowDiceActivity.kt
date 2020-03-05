@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_throw_dice.*
 import java.util.*
 
@@ -24,26 +22,11 @@ class ThrowDiceActivity : AppCompatActivity() {
     private var gridButtons: ArrayList<View> = arrayListOf()
     private var diceSet: ArrayList<Dice?>? = arrayListOf()
 
-    private var cyan: Int = 0
-    private var green: Int = 0
-    private var blue: Int = 0
-    private var red: Int = 0
-    private var yellow: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_throw_dice)
         getBundleFromIntent()
-        initColours()
         buildGrid(diceSet?.size ?: 0)
-    }
-
-    private fun initColours() {
-        cyan = ContextCompat.getColor(this, R.color.cyan)
-        green = ContextCompat.getColor(this, R.color.green)
-        blue = ContextCompat.getColor(this, R.color.blue)
-        red = ContextCompat.getColor(this, R.color.red)
-        yellow = ContextCompat.getColor(this, R.color.yellow)
     }
 
     private fun getBundleFromIntent() {
@@ -155,29 +138,15 @@ class ThrowDiceActivity : AppCompatActivity() {
 
     private fun onClickButton(v: View) {
         val button = v as Button
-
-//        val accent = ContextCompat.getColor(this, R.color.colorAccent)
-//        val cyan = ContextCompat.getColor(this, R.color.cyan)
-//        val green = ContextCompat.getColor(this, R.color.green)
-//        val blue = ContextCompat.getColor(this, R.color.blue)
-//        val red = ContextCompat.getColor(this, R.color.red)
-//        val yellow = ContextCompat.getColor(this, R.color.yellow)
         val buttonColor = button.background as ColorDrawable
         val colorId = buttonColor.color
 
         button.background = ColorDrawable(
             when (colorId) {
-                cyan, green, blue, red, yellow -> 0
+                Colours.CYAN, Colours.GREEN, Colours.BLUE, Colours.RED, Colours.YELLOW -> 0
                 else -> buttonDiceMapping[v.id]!!.colour
             }
         )
-
-//        if (colorId == accent)
-//            button.background = ColorDrawable(0)
-//        else
-//            button.background = ColorDrawable(accent)
-//        val index = v.tag as Int
-//        Toast.makeText(this, "Button $index pressed!", Toast.LENGTH_SHORT).show()
     }
 
     fun throwAllCheck(view: View?) {
@@ -186,7 +155,6 @@ class ThrowDiceActivity : AppCompatActivity() {
             button.setBackgroundColor(
                 if (throwAllCheckBox.isChecked)
                     buttonDiceMapping[button.id]!!.colour
-//                    ContextCompat.getColor(this, R.color.colorAccent)
                 else
                     0
             )
@@ -194,14 +162,12 @@ class ThrowDiceActivity : AppCompatActivity() {
     }
 
     fun throwDices(view: View?) {
-//        val accent = ContextCompat.getColor(this, R.color.colorAccent)
         gridButtons.forEach {
             val button = it as Button
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
-            if (arrayOf(cyan, blue, green, red, yellow).contains(colorId))
+            if (arrayOf(Colours.CYAN, Colours.GREEN, Colours.BLUE, Colours.RED, Colours.YELLOW).contains(colorId))
                 button.text = throwDice(buttonDiceMapping[button.id]!!.max)
-//                button.text = throwDice(diceSet!![count]!!.max)
         }
     }
 
