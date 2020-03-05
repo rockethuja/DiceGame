@@ -74,6 +74,8 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        app:srcCompat="@drawable/ic_add_circle_black_24dp" />-->
 
+
+
     <ListView
         android:id="@+id/dice_list_view"
         android:layout_width="0dp"

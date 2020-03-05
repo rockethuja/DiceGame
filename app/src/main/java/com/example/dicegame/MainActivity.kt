@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+
+
+
     }
 
     fun startCreateDiceActivity(view : View){
