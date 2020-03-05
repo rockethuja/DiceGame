@@ -12,9 +12,9 @@
         android:src="@drawable/dice_icon_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        android:contentDescription="@string/dices" />
 
     <Button
         android:id="@+id/addDice"

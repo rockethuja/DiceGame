@@ -117,13 +117,18 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
                 id: Long
             ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                when (selectedItem) {
-                    "cyan" -> changeColor(Colours.CYAN, frame, dicePosition)
-                    "red" -> changeColor(Colours.RED, frame, dicePosition)
-                    "green" -> changeColor(Colours.GREEN, frame, dicePosition)
-                    "yellow" -> changeColor(Colours.YELLOW, frame, dicePosition)
-                    "blue" -> changeColor(Colours.BLUE, frame, dicePosition)
-                }
+
+                changeColor(getColourCode(selectedItem), frame, dicePosition)
+
+//
+//
+//                when (selectedItem) {
+//                    "mauve" -> changeColor(Colours.MAUVE, frame, dicePosition)
+//                    "ice" -> changeColor(Colours.ICE, frame, dicePosition)
+//                    "mint" -> changeColor(Colours.MINT, frame, dicePosition)
+//                    "mustard" -> changeColor(Colours.MUSTARD, frame, dicePosition)
+//                    "apricot" -> changeColor(Colours.APRICOT, frame, dicePosition)
+//                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -140,7 +145,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     }
 
     private fun getColourPosition(colour: Int): Int {
-        val colours = mContext.resources.getStringArray(R.array.colours);
+        val colours = mContext.resources.getStringArray(R.array.colours)
 
         for (i in colours.indices) {
             val colourCode = getColourCode(colours[i])
@@ -152,11 +157,11 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
     private fun getColourCode(colour: String): Int {
         return when (colour) {
-            "cyan" -> Colours.CYAN
-            "red" -> Colours.RED
-            "green" -> Colours.GREEN
-            "yellow" -> Colours.YELLOW
-            "blue" -> Colours.BLUE
+            "mauve" -> Colours.MAUVE
+            "steel" -> Colours.STEEL
+            "mint" -> Colours.MINT
+            "mustard" -> Colours.MUSTARD
+            "apricot" -> Colours.APRICOT
             else -> 0
         }
     }

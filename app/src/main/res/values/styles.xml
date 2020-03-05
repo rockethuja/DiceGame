@@ -18,7 +18,7 @@
 
     </style>
     <style name="ButtonColor" parent="@android:style/Widget.Button">
-        <item name="android:textColor">@color/blue</item>
+<!--        <item name="android:textColor">@color/blue</item>-->
         <item name = "android:background">@color/colorAccent</item>
 
     </style>
