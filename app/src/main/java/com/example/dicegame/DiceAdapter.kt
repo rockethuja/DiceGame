@@ -69,13 +69,14 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
 
         dicePosition.text = position.toString()
         maxTextView.text = dice.max.toString()
-        setUpSpinner(spinner,frameLayout)
+        setUpSpinner(spinner,frameLayout, position)
 
         increase.setOnClickListener {
             var amount = maxTextView.text.toString().toInt()
             amount++
             maxTextView.text = amount.toString()
         }
+
         reduce.setOnClickListener {
             var amount = maxTextView.text.toString().toInt()
             amount--
@@ -87,8 +88,20 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
             this.notifyDataSetChanged()
         }
 
+
         return view
     }
+    fun addDice(){
+        dices.add(Dice())
+        this.notifyDataSetChanged()
+    }
+
+    fun changeColor(color :String, frame :FrameLayout, position: Int){
+        frame.setBackgroundColor(Color.parseColor(color))
+        val dice : Dice = dices.get(position)
+        dice.colour = Color.parseColor(color)
+    }
+
 
     private class ViewHolder {
         lateinit var  dicePosition: TextView
@@ -101,7 +114,10 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
 
     }
 
-    fun setUpSpinner(spinner: Spinner, frame: FrameLayout) {
+    fun setUpSpinner(spinner: Spinner, frame: FrameLayout, dicePosition: Int) {
+        //die position der farbe die der wüfel im spinner ausgewählt hat
+
+
 //        val spinner: Spinner = view.findViewById(R.id.spinner)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -112,11 +128,11 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
             ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 when (selectedItem) {
-                    "cyan" -> frame.setBackgroundColor(Color.parseColor("#03FFEE"))
-                    "red" -> frame.setBackgroundColor(Color.parseColor("#E80231"))
-                    "green" -> frame.setBackgroundColor(Color.parseColor("#83E802"))
-                    "yellow"-> frame.setBackgroundColor(Color.parseColor("#FFA40B"))
-                    "blue"-> frame.setBackgroundColor(Color.parseColor("#1C03FF"))
+                    "cyan" -> changeColor("#03FFEE", frame, dicePosition)
+                    "red" -> changeColor("#E80231", frame, dicePosition)
+                    "green" -> changeColor("#83E802" ,frame, dicePosition)
+                    "yellow"-> changeColor("#FFA40B", frame, dicePosition)
+                    "blue"-> changeColor("#1C03FF", frame, dicePosition)
                 }
             }
 
