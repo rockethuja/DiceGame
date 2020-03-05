@@ -117,7 +117,7 @@ class DiceAdapter(private val mContext: Context, private val dices: ArrayList<Di
     fun setUpSpinner(spinner: Spinner, frame: FrameLayout, dicePosition: Int) {
         //die position der farbe die der wüfel im spinner ausgewählt hat
 
-        spinner.setSelection((dices.get(dicePosition).colour))
+
 //        val spinner: Spinner = view.findViewById(R.id.spinner)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
