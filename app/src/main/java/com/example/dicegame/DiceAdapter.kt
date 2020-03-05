@@ -1,7 +1,6 @@
 package com.example.dicegame
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.Spinner
-import androidx.core.content.ContextCompat
-
 
 class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     BaseAdapter() {
@@ -64,7 +61,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         val frameLayout = holder.frameLayout
         val deleteButton = holder.deleteButton
 
-
         val dice = getItem(position) as Dice
 
         dicePosition.text = position.toString()
@@ -72,22 +68,17 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         setUpSpinner(spinner, frameLayout, position)
 
         increase.setOnClickListener {
-            //            var amount = dice.max//maxTextView.text.toString().toInt()
-//            amount++
             dice.max++
             maxTextView.text = dice.max.toString()
         }
 
         reduce.setOnClickListener {
-            //            var amount = maxTextView.text.toString().toInt()
-//            amount--
             dice.max--
             maxTextView.text = dice.max.toString()
         }
 
         deleteButton.setOnClickListener {
             dices.remove(dice)
-//            dices.remove(dices.get(position))
             this.notifyDataSetChanged()
         }
 
@@ -101,11 +92,9 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
     fun changeColor(color: Int, frame: FrameLayout, position: Int) {
         frame.setBackgroundColor(color)
-//        frame.setBackgroundColor(R.color.cyan)
-        val dice: Dice = dices[position] as Dice
+        val dice: Dice = dices[position]
         dice.colour = color
     }
-
 
     private class ViewHolder {
         lateinit var dicePosition: TextView
@@ -118,10 +107,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
     }
 
-    fun setUpSpinner(spinner: Spinner, frame: FrameLayout, dicePosition: Int) {
-        //die position der farbe die der wüfel im spinner ausgewählt hat
-
-//        val spinner: Spinner = view.findViewById(R.id.spinner)
+    private fun setUpSpinner(spinner: Spinner, frame: FrameLayout, dicePosition: Int) {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -129,20 +115,13 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
                 position: Int,
                 id: Long
             ) {
-                val cyan = ContextCompat.getColor(mContext, R.color.cyan)
-                val green = ContextCompat.getColor(mContext, R.color.green)
-                val blue = ContextCompat.getColor(mContext, R.color.blue)
-                val red = ContextCompat.getColor(mContext, R.color.red)
-                val yellow = ContextCompat.getColor(mContext, R.color.yellow)
-
-
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 when (selectedItem) {
-                    "cyan" -> changeColor(cyan, frame, dicePosition)
-                    "red" -> changeColor(red, frame, dicePosition)
-                    "green" -> changeColor(green, frame, dicePosition)
-                    "yellow" -> changeColor(yellow, frame, dicePosition)
-                    "blue" -> changeColor(blue, frame, dicePosition)
+                    "cyan" -> changeColor(Colours.CYAN, frame, dicePosition)
+                    "red" -> changeColor(Colours.RED, frame, dicePosition)
+                    "green" -> changeColor(Colours.GREEN, frame, dicePosition)
+                    "yellow" -> changeColor(Colours.YELLOW, frame, dicePosition)
+                    "blue" -> changeColor(Colours.BLUE, frame, dicePosition)
                 }
             }
 
@@ -159,14 +138,25 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         }
     }
 
-    fun getColourPosition(colour: Int) : Int {
-        val colours =  mContext.resources.getStringArray(R.array.colours);
+    private fun getColourPosition(colour: Int): Int {
+        val colours = mContext.resources.getStringArray(R.array.colours);
 
         for (i in colours.indices) {
-            if (Color.parseColor(colours[i]) == colour)
+            val colourCode = getColourCode(colours[i])
+            if (colourCode == colour)
                 return i
         }
         return -1
     }
 
+    private fun getColourCode(colour: String): Int {
+        return when (colour) {
+            "cyan" -> Colours.CYAN
+            "red" -> Colours.RED
+            "green" -> Colours.GREEN
+            "yellow" -> Colours.YELLOW
+            "blue" -> Colours.BLUE
+            else -> 0
+        }
+    }
 }
