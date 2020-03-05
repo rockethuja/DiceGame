@@ -7,7 +7,7 @@ import android.os.Parcelable
 
 //data class DiceGame(val dices : List<Dice>)
 
-data class Dice( val max : Int = 6 , val colour : Int = WHITE): Parcelable {
+data class Dice( var max : Int = 6 , var colour : Int = WHITE): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt()

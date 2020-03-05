@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
+
 import kotlinx.android.synthetic.main.activity_create_dice_set.*
-import kotlinx.android.synthetic.main.dice_item.view.*
-import java.text.FieldPosition
+
 
 
 class CreateDiceSetActivity : AppCompatActivity() {
@@ -18,7 +17,9 @@ class CreateDiceSetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
 
-        for (i in 0..9) {
+        if(savedInstanceState !=null){
+
+        }else {
             diceList.add(Dice())
         }
         adapter = DiceAdapter(this, diceList)
@@ -26,14 +27,7 @@ class CreateDiceSetActivity : AppCompatActivity() {
     }
 
     fun addDice(view: View) {
-        diceList.add(Dice())
-        adapter.notifyDataSetChanged()
-    }
-
-
-    fun deleteDice(position: Int){
-        diceList.remove(diceList.get(position))
-        adapter.notifyDataSetChanged()
+        adapter.addDice()
     }
 
     fun startThrowDiceActivity(view: View) {
