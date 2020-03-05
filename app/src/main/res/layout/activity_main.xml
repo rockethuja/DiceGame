@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dice_icon_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+
     <Button
         android:id="@+id/addDice"
         android:layout_width="wrap_content"

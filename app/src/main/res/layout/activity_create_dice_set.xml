@@ -17,6 +17,8 @@
 
         />
 
+
+
     <ListView
         android:id="@+id/dice_list_view"
         android:layout_width="0dp"
