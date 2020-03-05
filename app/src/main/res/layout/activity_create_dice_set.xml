@@ -42,6 +42,20 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +68,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/dicesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_h_2"
+        app:layout_constraintEnd_toStartOf="@id/guideline_v_40"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_05"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addDice"

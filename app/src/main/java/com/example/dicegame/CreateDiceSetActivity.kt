@@ -13,14 +13,29 @@ class CreateDiceSetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
+
+        initDiceList()
+        displayDicesCount()
+    }
+
+    private fun initDiceList() {
         val diceList = arrayListOf<Dice>()
         diceList.add(Dice())
         adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter
     }
 
+    fun displayDicesCount() {
+        val size = adapter.dices.size
+        if (size == 0)
+            startGame.isEnabled = false
+        val dice = if (size == 1) "dice" else "dices"
+        dicesCount.text = " $size $dice"
+    }
+
     fun addDice(view: View) {
         adapter.addDice()
+        displayDicesCount()
     }
 
     fun startThrowDiceActivity(view: View) {
@@ -32,6 +47,5 @@ class CreateDiceSetActivity : AppCompatActivity() {
             }
         )
     }
-
 
 }
