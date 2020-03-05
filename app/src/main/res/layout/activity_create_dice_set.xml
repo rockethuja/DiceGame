@@ -5,17 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateDiceSetActivity">
-    <Button
-        android:id="@+id/addDice"
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_dice"
-        android:onClick="addDice"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
 
-        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addDice"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addDice"
+        android:src="@drawable/ic_add_circle_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_h_2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_95"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_9"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/floatingActionButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:srcCompat="@drawable/ic_add_circle_black_24dp" />-->
 
 
 
@@ -23,12 +80,11 @@
         android:id="@+id/dice_list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/startGame"
+        app:layout_constraintBottom_toTopOf="@id/guideline_h_8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addDice"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_2"
+        />
 
     <Button
         android:id="@+id/startGame"
@@ -37,9 +93,10 @@
         android:text="@string/start"
         android:onClick="startThrowDiceActivity"
 
+        app:layout_constraintBottom_toTopOf="@id/guideline_h_95"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_85"
 
         />
 
