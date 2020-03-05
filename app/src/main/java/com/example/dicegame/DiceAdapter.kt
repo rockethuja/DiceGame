@@ -62,8 +62,9 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         val deleteButton = holder.deleteButton
 
         val dice = getItem(position) as Dice
+        val uiPosition = position +1
 
-        dicePosition.text = position.toString()
+        dicePosition.text = uiPosition.toString()
         maxTextView.text = dice.max.toString()
         setUpSpinner(spinner, frameLayout, position)
 
