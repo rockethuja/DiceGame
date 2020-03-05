@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat
 class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     BaseAdapter() {
 
+    // private val context : Context = mContext
+
     private val inflater: LayoutInflater =
         mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -66,8 +68,9 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
 
         val dice = getItem(position) as Dice
+        val uiPosition = position +1
 
-        dicePosition.text = position.toString()
+        dicePosition.text = uiPosition.toString()
         maxTextView.text = dice.max.toString()
         setUpSpinner(spinner, frameLayout, position)
 
@@ -90,6 +93,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 //            dices.remove(dices.get(position))
             this.notifyDataSetChanged()
         }
+
 
         return view
     }
@@ -120,6 +124,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
     fun setUpSpinner(spinner: Spinner, frame: FrameLayout, dicePosition: Int) {
         //die position der farbe die der wüfel im spinner ausgewählt hat
+
 
 //        val spinner: Spinner = view.findViewById(R.id.spinner)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

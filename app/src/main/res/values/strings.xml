@@ -12,6 +12,7 @@
     <string name="start">Start</string>
     <string name="colour">Colour:</string>
     <string name="delete">Delete</string>
+    <string name="amount_of_pages">Amount of pages:</string>
 
 
 </resources>
