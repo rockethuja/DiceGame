@@ -11,7 +11,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
     <TextView
-        android:id="@+id/Position"
+        android:id="@+id/dicePosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guideline_v_50"
-        app:layout_constraintBottom_toTopOf="@+id/textView_max"
+        app:layout_constraintBottom_toTopOf="@+id/maxTextView"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Amount of page: " />
 
@@ -31,12 +31,12 @@
         android:id="@+id/reduce"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintRight_toLeftOf="@+id/textView_max"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_max"
+        app:layout_constraintRight_toLeftOf="@+id/maxTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/maxTextView"
         android:text="-" />
 
     <TextView
-        android:id="@+id/textView_max"
+        android:id="@+id/maxTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,8 +47,8 @@
         android:id="@+id/increase"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintLeft_toRightOf="@+id/textView_max"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_max"
+        app:layout_constraintLeft_toRightOf="@+id/maxTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/maxTextView"
         android:text="+" />
 
     <Button

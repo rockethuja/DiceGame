@@ -10,18 +10,18 @@ import kotlinx.android.synthetic.main.activity_create_dice_set.*
 
 
 class CreateDiceSetActivity : AppCompatActivity() {
-    val diceList = arrayListOf<Dice>()
+//    val diceList = arrayListOf<Dice>()
     lateinit var adapter: DiceAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dice_set)
-
-        if(savedInstanceState !=null){
-
-        }else {
-            diceList.add(Dice())
-        }
+//        if(savedInstanceState !=null){
+//
+//        }else {
+        val diceList = arrayListOf<Dice>()
+        diceList.add(Dice())
+//        }
         adapter = DiceAdapter(this, diceList)
         dice_list_view.adapter = adapter
     }
@@ -34,7 +34,7 @@ class CreateDiceSetActivity : AppCompatActivity() {
         startActivity(
             Intent(this, ThrowDiceActivity::class.java).apply {
                 putExtras(Bundle().apply {
-                    putParcelableArrayList("diceSet",diceList)
+                    putParcelableArrayList("diceSet", adapter.dices)
                 })
             }
         )
