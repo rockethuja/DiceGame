@@ -99,7 +99,7 @@ class ThrowDiceActivity : AppCompatActivity() {
             set.connect(idB, ConstraintSet.TOP, hIds[0], ConstraintSet.BOTTOM, 3)
             set.connect(idB, ConstraintSet.BOTTOM, hIds[1], ConstraintSet.TOP, 3)
             set.applyTo(constraintLayout)
-            return;
+            return
         }
 
         val border = (gridSize + 1) / 2
@@ -108,7 +108,7 @@ class ThrowDiceActivity : AppCompatActivity() {
         for (i in 0 until border) {
             for (j in 0 until 2) {
                 if (gridSize % 2 != 0 && j == 1 && i == (border - 1)) {
-                    continue;
+                    continue
                 }
                 val idB = View.generateViewId()
                 buttonDiceMapping[idB] = diceSet!![count]!!
@@ -142,10 +142,8 @@ class ThrowDiceActivity : AppCompatActivity() {
         val colorId = buttonColor.color
 
         button.background = ColorDrawable(
-            when (colorId) {
-                Colours.CYAN, Colours.GREEN, Colours.BLUE, Colours.RED, Colours.YELLOW -> 0
-                else -> buttonDiceMapping[v.id]!!.colour
-            }
+            if (Colours.ALL_COLOURS.contains(colorId)) 0
+            else buttonDiceMapping[v.id]!!.colour
         )
     }
 
@@ -166,7 +164,7 @@ class ThrowDiceActivity : AppCompatActivity() {
             val button = it as Button
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
-            if (arrayOf(Colours.CYAN, Colours.GREEN, Colours.BLUE, Colours.RED, Colours.YELLOW).contains(colorId))
+            if (Colours.ALL_COLOURS.contains(colorId))
                 button.text = throwDice(buttonDiceMapping[button.id]!!.max)
         }
     }
@@ -174,20 +172,4 @@ class ThrowDiceActivity : AppCompatActivity() {
     private fun throwDice(max: Int): String {
         return Random.nextInt(1, max + 1).toString()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        // getMenuInflater().inflate(R.menu.menu_main, menu)
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_size3 -> buildGrid(3)
-//            R.id.action_size4 -> buildGrid(4)
-//            R.id.action_size5 -> buildGrid(5)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
 }

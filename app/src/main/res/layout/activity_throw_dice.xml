@@ -8,14 +8,14 @@
     tools:context=".ThrowDiceActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_h_05"
+        android:id="@+id/guideline_h_90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_h_10"
+        android:id="@+id/guideline_h_95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -35,11 +35,10 @@
         android:checked="true"
         android:onClick="throwAllCheck"
         android:text="@string/throw_all"
-
-        app:layout_constraintBottom_toTopOf="@+id/guideline_h_10"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toStartOf="@+id/guideline_v_50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_05" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
 
     <Button
         android:id="@+id/throwButton"
@@ -47,8 +46,8 @@
         android:layout_height="wrap_content"
         android:onClick="throwDices"
         android:text="@string/throw_dices"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_h_10"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_50"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_05" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
 </androidx.constraintlayout.widget.ConstraintLayout>
