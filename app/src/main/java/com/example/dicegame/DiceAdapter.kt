@@ -101,10 +101,10 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         lateinit var dicePosition: TextView
         lateinit var maxTextView: TextView
         lateinit var spinner: Spinner
-        lateinit var increase: Button
-        lateinit var reduce: Button
+        lateinit var increase: ImageButton
+        lateinit var reduce: ImageButton
         lateinit var frameLayout: FrameLayout
-        lateinit var deleteButton: Button
+        lateinit var deleteButton: ImageButton
 
     }
 
