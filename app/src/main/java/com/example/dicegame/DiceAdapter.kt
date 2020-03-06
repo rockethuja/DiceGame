@@ -1,6 +1,7 @@
 package com.example.dicegame
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -81,7 +82,8 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
             if (dice.max > 2) dice.max--
             maxTextView.text = dice.max.toString()
         }
-
+       // deleteButton.setColorFilter(Color.BLACK)
+       // deleteButton.setBackgroundColor(Color.BLACK)
         deleteButton.setOnClickListener {
             dices.remove(dice)
             try {
