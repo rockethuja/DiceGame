@@ -164,12 +164,31 @@ class ThrowDiceActivity : AppCompatActivity() {
             val button = it as Button
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
-            if (Colours.ALL_COLOURS.contains(colorId))
+            if (Colours.ALL_COLOURS.contains(colorId)) {
+                Thread(Runnable {
+                    //                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = true }
+                    for (i in 0..11) {
+                        runOnUiThread {
+                            button.text = throwDice(buttonDiceMapping[button.id]!!.max)
+                        }
+                        sleep(60)
+                    }
+//                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = false }
+                }).start()
                 button.text = throwDice(buttonDiceMapping[button.id]!!.max)
+            }
         }
     }
 
     private fun throwDice(max: Int): String {
         return Random.nextInt(1, max + 1).toString()
+    }
+
+    private fun sleep(millis: Long) {
+        try {
+            Thread.sleep(millis, 0)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
     }
 }
