@@ -37,6 +37,12 @@ class ThrowDiceActivity : AppCompatActivity() {
 //        gridSize = newSize
 //        gridButtons = ArrayList(newSize)
         val colours = getDistinctColours()
+        if (colours.size == 1) {
+            throwAllCheckBox.buttonTintList = ColorStateList.valueOf(colours[0])
+
+            return
+        }
+
         checkBoxes = HashMap(colours.size)
         // das Ziellayout
         // val constraintLayout: ConstraintLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
