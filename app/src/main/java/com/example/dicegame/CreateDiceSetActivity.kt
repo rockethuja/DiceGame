@@ -35,6 +35,7 @@ class CreateDiceSetActivity : AppCompatActivity() {
 
     fun addDice(view: View) {
         adapter.addDice()
+        startGame.isEnabled = true
         displayDicesCount()
     }
 

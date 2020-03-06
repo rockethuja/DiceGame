@@ -66,7 +66,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         val deleteButton = holder.deleteButton
 
         val dice = getItem(position) as Dice
-        val uiPosition = position +1
+        val uiPosition = position + 1
 
 //        dicePosition.text = uiPosition.toString()
         maxTextView.text = dice.max.toString()
@@ -78,7 +78,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         }
 
         reduce.setOnClickListener {
-            dice.max--
+            if (dice.max > 2) dice.max--
             maxTextView.text = dice.max.toString()
         }
 
@@ -86,9 +86,12 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
             dices.remove(dice)
             try {
                 (mContext as CreateDiceSetActivity).displayDicesCount()
-            }
-            catch (exception : Exception) {
-                Log.e(TAG, "DiceAdapter was used by other activity than CreateDiceSetActivity", exception)
+            } catch (exception: Exception) {
+                Log.e(
+                    TAG,
+                    "DiceAdapter was used by other activity than CreateDiceSetActivity",
+                    exception
+                )
             }
             this.notifyDataSetChanged()
         }
