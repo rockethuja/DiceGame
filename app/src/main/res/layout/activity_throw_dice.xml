@@ -8,7 +8,7 @@
     tools:context=".ThrowDiceActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_h_90"
+        android:id="@+id/guideline_h_80"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/colorAccent"
-        app:layout_constraintTop_toTopOf="@id/guideline_h_90"
+        app:layout_constraintTop_toTopOf="@id/guideline_h_80"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toStartOf="@+id/guideline_v_50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_80" />
 
     <Button
         android:id="@+id/throwButton"
@@ -58,5 +58,5 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_50"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_80" />
 </androidx.constraintlayout.widget.ConstraintLayout>
