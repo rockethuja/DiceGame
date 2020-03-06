@@ -6,6 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,14 +53,23 @@
 
     <Button
         android:id="@+id/addDice"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="startCreateDiceActivity"
         android:text="@string/create_dice_set"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/guideline_h_50"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_75"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_25"
+        app:layout_constraintTop_toTopOf="@id/guideline_h_30" />
+
+    <Button
+        android:id="@+id/loadDice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/load_dice_set"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_h_70"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_75"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_25"
+        app:layout_constraintTop_toTopOf="@id/guideline_h_50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.example.dicegame
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -20,6 +22,7 @@ class ThrowDiceActivity : AppCompatActivity() {
     private var gridSize = 0
     private var buttonDiceMapping = mutableMapOf<Int, Dice>()
     private var gridButtons: ArrayList<View> = arrayListOf()
+    private var checkBoxes = mutableMapOf<Int, View>()
     private var diceSet: ArrayList<Dice?>? = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +30,81 @@ class ThrowDiceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_throw_dice)
         getBundleFromIntent()
         buildGrid(diceSet?.size ?: 0)
+        buildCheckboxes()
+    }
+
+    private fun buildCheckboxes() {
+//        gridSize = newSize
+//        gridButtons = ArrayList(newSize)
+        val colours = getDistinctColours()
+        checkBoxes = HashMap(colours.size)
+        // das Ziellayout
+        // val constraintLayout: ConstraintLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
+        val constraintLayout: ConstraintLayout = findViewById(R.id.rootLayout)
+//        constraintLayout.removeAllViews()
+        // Constraints hier sammeln
+        val set = ConstraintSet()
+        set.clone(constraintLayout)
+        // obere und untere "Grenze" zwischen 10% und 40%
+        val idHG05 = View.generateViewId()
+        set.create(idHG05, ConstraintSet.HORIZONTAL_GUIDELINE)
+        set.setGuidelinePercent(idHG05, 0.95f)
+        val idHG10 = View.generateViewId()
+        set.create(idHG10, ConstraintSet.HORIZONTAL_GUIDELINE)
+        set.setGuidelinePercent(idHG10, 0.99f)
+        // gridSize+1 vertikale Guidelines zwischen 5% und 95%
+        val marginL = 0.05f
+        val marginR = 0.05f
+        val dx = (1.0f - marginL - marginR) / colours.size.toFloat()
+        val ids = ArrayList<Int>(colours.size + 1)
+        for (i in 0..colours.size) {
+            val idG = View.generateViewId()
+            set.create(idG, ConstraintSet.VERTICAL_GUIDELINE)
+            set.setGuidelinePercent(idG, marginL + i * dx)
+            ids.add(idG)
+        }
+        // gridSize Buttons zwischen den Guidelines i und i+1
+        for (i in colours.indices) {
+//            val button = Button(this)
+//            val idB = View.generateViewId()
+//            button.id = idB
+//            button.text = "Button $i"
+//            button.tag = i
+//            button.setOnClickListener { v: View -> onClickButton(v) } // Methodenreferenz
+            val idB = View.generateViewId()
+            val checkBox = CheckBox(this).apply {
+                id = idB
+                isChecked = true
+                buttonTintList = ColorStateList.valueOf(colours[i])
+//                setBackgroundColor(colours[i])
+//                text = "$i"
+                tag = colours[i]
+                setOnClickListener { v: View -> onClickCheckBox(v) }
+            }
+            constraintLayout.addView(checkBox)
+            //gridButtons!!.add(button)
+            checkBoxes[checkBox.id] = checkBox
+            set.connect(idB, ConstraintSet.LEFT, ids[i], ConstraintSet.RIGHT, 0)
+            set.connect(idB, ConstraintSet.RIGHT, ids[i + 1], ConstraintSet.LEFT, 0)
+            set.connect(idB, ConstraintSet.TOP, idHG05, ConstraintSet.BOTTOM, 0)
+            set.connect(idB, ConstraintSet.BOTTOM, idHG10, ConstraintSet.TOP, 0)
+        }
+        // und alle Constraints aktivieren
+        set.applyTo(constraintLayout)
+    }
+
+    private fun getDistinctColours(): ArrayList<Int> {
+        val distinctColours = arrayListOf<Int>()
+
+        for(i in 0 until diceSet!!.size) {
+            val dice = diceSet!![i]!!
+            if (distinctColours.contains(dice.colour))
+                continue
+            else
+                distinctColours.add(dice.colour)
+        }
+
+        return distinctColours
     }
 
     private fun getBundleFromIntent() {
@@ -159,17 +237,53 @@ class ThrowDiceActivity : AppCompatActivity() {
         }
     }
 
+    private fun onClickCheckBox(v: View) {
+        gridButtons.forEach {
+            val button = it as Button
+            val dice = buttonDiceMapping[button.id]!!
+            val colour = v.tag as Int
+
+            if (colour == dice.colour) {
+                button.setBackgroundColor(
+                    if ((checkBoxes[v.id] as CheckBox).isChecked)
+                        buttonDiceMapping[button.id]!!.colour
+                    else
+                        0
+                )
+            }
+        }
+    }
+
     fun throwDices(view: View?) {
         gridButtons.forEach {
             val button = it as Button
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
-            if (Colours.ALL_COLOURS.contains(colorId))
+            if (Colours.ALL_COLOURS.contains(colorId)) {
+                Thread(Runnable {
+                    //                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = true }
+                    for (i in 0..11) {
+                        runOnUiThread {
+                            button.text = throwDice(buttonDiceMapping[button.id]!!.max)
+                        }
+                        sleep(60)
+                    }
+//                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = false }
+                }).start()
                 button.text = throwDice(buttonDiceMapping[button.id]!!.max)
+            }
         }
     }
 
     private fun throwDice(max: Int): String {
         return Random.nextInt(1, max + 1).toString()
+    }
+
+    private fun sleep(millis: Long) {
+        try {
+            Thread.sleep(millis, 0)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
     }
 }

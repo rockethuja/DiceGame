@@ -17,6 +17,7 @@
     <string name="decrease">Decrease</string>
     <string name="start">Start</string>
     <string name="delete">Delete</string>
+    <string name="load_dice_set">Load dice set</string>
 
 
 </resources>

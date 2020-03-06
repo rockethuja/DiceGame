@@ -8,11 +8,11 @@
     tools:context=".ThrowDiceActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_h_90"
+        android:id="@+id/guideline_h_80"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_h_95"
@@ -28,6 +28,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <FrameLayout
+        android:id="@+id/list_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="@id/guideline_h_80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <CheckBox
         android:id="@+id/throwAllCheckBox"
         android:layout_width="wrap_content"
@@ -38,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toStartOf="@+id/guideline_v_50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_80" />
 
     <Button
         android:id="@+id/throwButton"
@@ -49,5 +58,5 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_h_95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_50"
-        app:layout_constraintTop_toTopOf="@+id/guideline_h_90" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_h_80" />
 </androidx.constraintlayout.widget.ConstraintLayout>
