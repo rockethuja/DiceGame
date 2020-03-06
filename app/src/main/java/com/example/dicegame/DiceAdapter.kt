@@ -1,6 +1,7 @@
 package com.example.dicegame
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.Spinner
+import java.lang.Exception
+
+private const val TAG = "DiceAdapter"
 
 class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     BaseAdapter() {
@@ -62,9 +66,9 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         val deleteButton = holder.deleteButton
 
         val dice = getItem(position) as Dice
-        val uiPosition = position +1
+        val uiPosition = position + 1
 
-        dicePosition.text = uiPosition.toString()
+//        dicePosition.text = uiPosition.toString()
         maxTextView.text = dice.max.toString()
         setUpSpinner(spinner, frameLayout, position)
 
@@ -74,12 +78,21 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         }
 
         reduce.setOnClickListener {
-            dice.max--
+            if (dice.max > 2) dice.max--
             maxTextView.text = dice.max.toString()
         }
 
         deleteButton.setOnClickListener {
             dices.remove(dice)
+            try {
+                (mContext as CreateDiceSetActivity).displayDicesCount()
+            } catch (exception: Exception) {
+                Log.e(
+                    TAG,
+                    "DiceAdapter was used by other activity than CreateDiceSetActivity",
+                    exception
+                )
+            }
             this.notifyDataSetChanged()
         }
 
@@ -92,13 +105,13 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     }
 
     fun changeColor(color: Int, frame: FrameLayout, position: Int) {
-        frame.setBackgroundColor(color)
         val dice: Dice = dices[position]
         dice.colour = color
+        frame.setBackgroundColor(dice.colour)
     }
 
     private class ViewHolder {
-        lateinit var dicePosition: TextView
+        lateinit var dicePosition: ImageView
         lateinit var maxTextView: TextView
         lateinit var spinner: Spinner
         lateinit var increase: ImageButton
@@ -119,16 +132,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
                 val selectedItem = parent.getItemAtPosition(position).toString()
 
                 changeColor(getColourCode(selectedItem), frame, dicePosition)
-
-//
-//
-//                when (selectedItem) {
-//                    "mauve" -> changeColor(Colours.MAUVE, frame, dicePosition)
-//                    "ice" -> changeColor(Colours.ICE, frame, dicePosition)
-//                    "mint" -> changeColor(Colours.MINT, frame, dicePosition)
-//                    "mustard" -> changeColor(Colours.MUSTARD, frame, dicePosition)
-//                    "apricot" -> changeColor(Colours.APRICOT, frame, dicePosition)
-//                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}

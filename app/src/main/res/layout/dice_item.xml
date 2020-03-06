@@ -41,15 +41,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
-    <TextView
+    <ImageView
         android:id="@+id/dicePosition"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
+        android:src="@drawable/ic_casino_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_v_15"
-        app:layout_constraintStart_toStartOf="@id/guideline_v_05"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
