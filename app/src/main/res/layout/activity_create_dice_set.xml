@@ -56,6 +56,13 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,7 +106,7 @@
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@id/guideline_h_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/dice_list_view"
@@ -108,31 +115,41 @@
         app:layout_constraintBottom_toTopOf="@id/guideline_h_85"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_h_2"
-        />
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_2" />
 
     <FrameLayout
         android:id="@+id/list_divider_bottom"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/colorAccent"
-        app:layout_constraintTop_toTopOf="@id/guideline_h_85"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_h_85" />
 
     <Button
         android:id="@+id/startGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start"
         android:onClick="startThrowDiceActivity"
+        android:text="@string/start"
 
         app:layout_constraintBottom_toTopOf="@id/guideline_h_95"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_95"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_50"
         app:layout_constraintTop_toBottomOf="@id/guideline_h_90"
-
         />
 
+    <Button
+        android:id="@+id/saveDices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveDices"
+        android:text="@string/save_diceset"
+
+        app:layout_constraintBottom_toTopOf="@id/guideline_h_95"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_50"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_05"
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_90"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

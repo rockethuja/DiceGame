@@ -2,7 +2,10 @@ package com.example.dicegame
 
 import android.graphics.Color
 
-object Colours {
+object Constants {
+
+    const val DICE_FILE = "dices"
+
     val STEEL = Color.parseColor("#ABCADA")
     val APRICOT = Color.parseColor("#DDBDC0")
     val MAUVE = Color.parseColor("#B7B4DB")

@@ -3,7 +3,7 @@ package com.example.dicegame
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Dice(var max: Int = 6, var colour: Int = Colours.STEEL) : Parcelable {
+data class Dice(var max: Int = 6, var colour: Int = Constants.STEEL) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt()

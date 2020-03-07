@@ -1,11 +1,15 @@
 package com.example.dicegame
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_create_dice_set.*
+import java.nio.charset.Charset
+
 
 class CreateDiceSetActivity : AppCompatActivity() {
     lateinit var adapter: DiceAdapter
@@ -37,6 +41,7 @@ class CreateDiceSetActivity : AppCompatActivity() {
         adapter.addDice()
         startGame.isEnabled = true
         displayDicesCount()
+
     }
 
     fun startThrowDiceActivity(view: View) {
@@ -49,4 +54,18 @@ class CreateDiceSetActivity : AppCompatActivity() {
         )
     }
 
+    fun saveDices(view: View) {
+        try {
+            openFileOutput(Constants.DICE_FILE, Context.MODE_PRIVATE).use {
+                val gson = Gson()
+                val json: String = gson.toJson(adapter.dices)
+                it.write(json.toByteArray(Charset.forName("UTF-8")))
+                Toast.makeText(this, "Diceset saved", Toast.LENGTH_SHORT).show()
+
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
 }

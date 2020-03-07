@@ -42,14 +42,15 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/dices"
         android:src="@drawable/dice_icon_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/dices" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addDice"
@@ -67,6 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/load_dice_set"
+        android:onClick="loadDiceSet"
         app:layout_constraintBottom_toBottomOf="@id/guideline_h_70"
         app:layout_constraintEnd_toEndOf="@id/guideline_v_75"
         app:layout_constraintStart_toStartOf="@id/guideline_v_25"

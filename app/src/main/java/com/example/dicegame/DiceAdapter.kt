@@ -1,7 +1,6 @@
 package com.example.dicegame
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +42,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
             view = inflater.inflate(R.layout.dice_item, parent, false)
             holder = ViewHolder()
 
-            holder.dicePosition = view.findViewById(R.id.dicePosition)
             holder.increase = view.findViewById(R.id.increase)
             holder.reduce = view.findViewById(R.id.reduce)
             holder.spinner = view.findViewById(R.id.spinner)
@@ -58,7 +56,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
             holder = convertView.tag as ViewHolder
         }
 
-        val dicePosition = holder.dicePosition
         val maxTextView = holder.maxTextView
         val spinner = holder.spinner
         val increase = holder.increase
@@ -67,9 +64,7 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
         val deleteButton = holder.deleteButton
 
         val dice = getItem(position) as Dice
-        val uiPosition = position + 1
 
-//        dicePosition.text = uiPosition.toString()
         maxTextView.text = dice.max.toString()
         setUpSpinner(spinner, frameLayout, position)
 
@@ -82,8 +77,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
             if (dice.max > 2) dice.max--
             maxTextView.text = dice.max.toString()
         }
-       // deleteButton.setColorFilter(Color.BLACK)
-       // deleteButton.setBackgroundColor(Color.BLACK)
         deleteButton.setOnClickListener {
             dices.remove(dice)
             try {
@@ -113,7 +106,6 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
     }
 
     private class ViewHolder {
-        lateinit var dicePosition: ImageView
         lateinit var maxTextView: TextView
         lateinit var spinner: Spinner
         lateinit var increase: ImageButton
@@ -162,11 +154,11 @@ class DiceAdapter(private val mContext: Context, val dices: ArrayList<Dice>) :
 
     private fun getColourCode(colour: String): Int {
         return when (colour) {
-            "mauve" -> Colours.MAUVE
-            "steel" -> Colours.STEEL
-            "mint" -> Colours.MINT
-            "mustard" -> Colours.MUSTARD
-            "apricot" -> Colours.APRICOT
+            "mauve" -> Constants.MAUVE
+            "steel" -> Constants.STEEL
+            "mint" -> Constants.MINT
+            "mustard" -> Constants.MUSTARD
+            "apricot" -> Constants.APRICOT
             else -> 0
         }
     }

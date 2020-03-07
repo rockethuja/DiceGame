@@ -34,31 +34,22 @@ class ThrowDiceActivity : AppCompatActivity() {
     }
 
     private fun buildCheckboxes() {
-//        gridSize = newSize
-//        gridButtons = ArrayList(newSize)
         val colours = getDistinctColours()
         if (colours.size == 1) {
             throwAllCheckBox.buttonTintList = ColorStateList.valueOf(colours[0])
-
             return
         }
 
         checkBoxes = HashMap(colours.size)
-        // das Ziellayout
-        // val constraintLayout: ConstraintLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
         val constraintLayout: ConstraintLayout = findViewById(R.id.rootLayout)
-//        constraintLayout.removeAllViews()
-        // Constraints hier sammeln
         val set = ConstraintSet()
         set.clone(constraintLayout)
-        // obere und untere "Grenze" zwischen 10% und 40%
         val idHG05 = View.generateViewId()
         set.create(idHG05, ConstraintSet.HORIZONTAL_GUIDELINE)
         set.setGuidelinePercent(idHG05, 0.95f)
         val idHG10 = View.generateViewId()
         set.create(idHG10, ConstraintSet.HORIZONTAL_GUIDELINE)
         set.setGuidelinePercent(idHG10, 0.99f)
-        // gridSize+1 vertikale Guidelines zwischen 5% und 95%
         val marginL = 0.05f
         val marginR = 0.05f
         val dx = (1.0f - marginL - marginR) / colours.size.toFloat()
@@ -69,33 +60,22 @@ class ThrowDiceActivity : AppCompatActivity() {
             set.setGuidelinePercent(idG, marginL + i * dx)
             ids.add(idG)
         }
-        // gridSize Buttons zwischen den Guidelines i und i+1
         for (i in colours.indices) {
-//            val button = Button(this)
-//            val idB = View.generateViewId()
-//            button.id = idB
-//            button.text = "Button $i"
-//            button.tag = i
-//            button.setOnClickListener { v: View -> onClickButton(v) } // Methodenreferenz
             val idB = View.generateViewId()
             val checkBox = CheckBox(this).apply {
                 id = idB
                 isChecked = true
                 buttonTintList = ColorStateList.valueOf(colours[i])
-//                setBackgroundColor(colours[i])
-//                text = "$i"
                 tag = colours[i]
                 setOnClickListener { v: View -> onClickCheckBox(v) }
             }
             constraintLayout.addView(checkBox)
-            //gridButtons!!.add(button)
             checkBoxes[checkBox.id] = checkBox
             set.connect(idB, ConstraintSet.LEFT, ids[i], ConstraintSet.RIGHT, 0)
             set.connect(idB, ConstraintSet.RIGHT, ids[i + 1], ConstraintSet.LEFT, 0)
             set.connect(idB, ConstraintSet.TOP, idHG05, ConstraintSet.BOTTOM, 0)
             set.connect(idB, ConstraintSet.BOTTOM, idHG10, ConstraintSet.TOP, 0)
         }
-        // und alle Constraints aktivieren
         set.applyTo(constraintLayout)
     }
 
@@ -226,7 +206,7 @@ class ThrowDiceActivity : AppCompatActivity() {
         val colorId = buttonColor.color
 
         button.background = ColorDrawable(
-            if (Colours.ALL_COLOURS.contains(colorId)) 0
+            if (Constants.ALL_COLOURS.contains(colorId)) 0
             else buttonDiceMapping[v.id]!!.colour
         )
     }
@@ -265,16 +245,14 @@ class ThrowDiceActivity : AppCompatActivity() {
             val button = it as Button
             val buttonColor = button.background as ColorDrawable
             val colorId = buttonColor.color
-            if (Colours.ALL_COLOURS.contains(colorId)) {
+            if (Constants.ALL_COLOURS.contains(colorId)) {
                 Thread(Runnable {
-                    //                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = true }
                     for (i in 0..11) {
                         runOnUiThread {
                             button.text = throwDice(buttonDiceMapping[button.id]!!.max)
                         }
                         sleep(60)
                     }
-//                    checkBoxIsRunning.post { checkBoxIsRunning.isChecked = false }
                 }).start()
                 button.text = throwDice(buttonDiceMapping[button.id]!!.max)
             }
