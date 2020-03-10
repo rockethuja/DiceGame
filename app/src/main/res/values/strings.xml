@@ -20,4 +20,6 @@
     <string name="load_dice_set">Load dice set</string>
 
 
+    <string name="save_create_dice_set_key">save</string>
+
 </resources>
